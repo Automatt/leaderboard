@@ -29,7 +29,8 @@ class Leaderboard
     
     @redis_options = redis_options
     
-    @redis_connection = Redis.new(@redis_options)
+    @redis_connection = redis_options[:connection] if redis_options[:connection]
+    @redis_connection = Redis.new(@redis_options) unless @redis_connection
   end
   
   def page_size=(page_size)
